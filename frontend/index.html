@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="National Service Scheme (NSS) portal for students and administrators">
-  <title>NSS Portal | National Service Scheme</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSS Portal | National Service Scheme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -14,11 +14,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
             background: #1e3c72;
             min-height: 100vh;
             position: relative;
+            color: #f8f9fa;
             overflow-x: hidden;
         }
 
@@ -184,9 +183,12 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Subtle dot pattern overlay */
         .hero-section::before {
             content: '';
             position: absolute;
@@ -218,7 +220,7 @@
         }
 
         .hero-subtitle {
-      font-size: 1.4rem;
+            font-size: 1.4rem;
             font-weight: 300;
             margin-bottom: 30px;
             opacity: 0.9;
@@ -239,10 +241,56 @@
             margin-top: 20px;
         }
 
-        /* Content Section */
-        .content-section {
-            background: white;
+        .hero-buttons {
+            margin-top: 40px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-btn-primary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-btn-primary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Section Styles */
+        .section {
             padding: 80px 0;
+            position: relative;
+            z-index: 2;
         }
 
         .container {
@@ -251,60 +299,189 @@
             padding: 0 20px;
         }
 
-        /* Tab Navigation */
-        .tab-navigation {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .tab-link {
-            padding: 15px 30px;
-            text-decoration: none;
-            color: #6c757d;
-      font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            margin: 0 10px;
-        }
-
-        .tab-link:hover {
-            color: #1e3c72;
-        }
-
-        .tab-link.active {
-            color: #1e3c72;
-            border-bottom-color: #1e3c72;
-        }
-
-        .content-title {
+        .section-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 600;
-            color: #1e3c72;
-            margin-bottom: 40px;
+            color: #ffffff;
+            margin-bottom: 50px;
+            text-shadow: 0 2px 8px rgba(30, 60, 114, 0.3);
         }
 
-        .tab-content {
+        .section-card {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: #f8f9fa;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(6px);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-icon {
+            color: #ffd700;
+            text-shadow: 0 2px 8px rgba(30, 60, 114, 0.3);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #222e50;
+            color: #fff;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #fff;
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            color: #bbb;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.2s ease-out;
+            background: transparent;
+            padding: 0 4px;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            background: #1e3c72;
+            color: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
+            outline: none;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label,
+        .input-group select:focus + label,
+        .input-group select:not([value=""]) + label {
+            top: -10px;
+            font-size: 0.85rem;
+            color: #ffd700;
+            background: #222e50;
+            padding: 0 4px;
+            left: 10px;
+        }
+
+        .modal-content form button[type="submit"] {
+            width: 100%;
+            background: linear-gradient(90deg, #1a4b8c, #003366);
+            color: #fff;
+            padding: 14px 20px;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .modal-content form button[type="submit"]:hover {
+            background: linear-gradient(90deg, #003366, #1a4b8c);
+            transform: translateY(-1px);
+        }
+
+        #otherRoleField {
             display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            margin-top: 1rem;
         }
 
         /* Responsive Design */
@@ -358,123 +535,584 @@
                 font-size: 1.2rem;
             }
 
-            .tab-navigation {
-                flex-wrap: wrap;
+            .section-card {
+                padding: 1rem;
             }
 
-            .tab-link {
-                margin: 5px;
-                padding: 10px 20px;
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
             }
-    }
-  </style>
+        }
+
+        /* Event Cards */
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-content {
+            padding: 20px;
+            background: #1e3c72;
+            color: white;
+        }
+
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .event-date {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-bottom: 12px;
+        }
+
+        .event-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+        }
+
+        .event-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .register-btn:hover {
+            background: #c53030;
+        }
+
+        .learn-btn {
+            background: #38a169;
+            color: white;
+        }
+
+        .learn-btn:hover {
+            background: #2f855a;
+        }
+
+        .join-btn {
+            background: #3182ce;
+            color: white;
+        }
+
+        .join-btn:hover {
+            background: #2c5aa0;
+        }
+
+        /* Gallery Cards */
+        .gallery-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-content {
+            padding: 20px;
+            background: #1e3c72;
+            color: white;
+        }
+
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .gallery-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        /* Team Cards */
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-image {
+            height: 200px;
+            overflow: hidden;
+            background: #f7fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-image img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-content {
+            padding: 20px;
+            background: #1e3c72;
+            color: white;
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .team-role {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .team-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        /* Contact Cards */
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-content {
+            padding: 20px;
+            background: #1e3c72;
+            color: white;
+        }
+
+        .contact-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .contact-info {
+            space-y: 4;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #e2e8f0;
+        }
+
+        .contact-item i {
+            margin-right: 12px;
+            color: #a0aec0;
+            width: 16px;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quick-link {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .quick-link:hover {
+            color: white;
+        }
+
+        /* Section Buttons */
+        .section-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            margin-top: 20px;
+        }
+
+        .section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <header class="header" id="navbar-custom">
-    <nav class="nav-container">
-        <a href="index.html" class="logo">NSS Portal</a>
-        
-        <ul class="nav-menu" id="nav-menu">
-            <li class="nav-item">
-                <a href="index.html" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="About_Us.html" class="nav-link">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a href="Activity.html" class="nav-link">Activities</a>
-            </li>
-            <li class="nav-item">
-                <a href="contact.html" class="nav-link ">Contact</a>
-            </li>
-        </ul>
+    <!-- Header Section -->
+    <header class="header" id="navbar-custom">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">NSS Portal</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="About_Us.html" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Activity.html" class="nav-link">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
 
-        <div class="auth-section">
-            <a href="auth/login.html" class="login-btn">Login</a>
-            <a href="auth/register.html" class="register-btn">Register</a>
-        </div>
+            <div class="auth-section">
+                <a href="auth/login.html" class="login-btn" id="loginBtn">Login</a>
+                <a href="auth/register.html" class="register-btn" id="registerBtn">Register</a>
+            </div>
 
-        <div class="mobile-menu" id="mobile-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
-</header>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section id="home" class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">National Service Scheme</h1>
             <p class="hero-subtitle">Building Character Through Service</p>
             <div class="hero-separator"></div>
             <p class="hero-motto">"Not Me But You"</p>
+            <div class="hero-buttons">
+                <a href="#about" class="hero-btn hero-btn-primary">Learn More</a>
+                <a href="auth/register.html" class="hero-btn hero-btn-secondary" id="heroRegisterBtn">Join NSS Today</a>
+            </div>
         </div>
     </section>
 
-   
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About NSS SilverOak</h2>
+            <div class="grid-2">
+                <div class="section-card">
+                    <h3 class="text-xl font-semibold mb-4">Our Mission</h3>
+                    <p class="text-lg mb-4">
+                        The National Service Scheme (NSS) unit of SilverOak University is committed to developing students' personality through community service. NSS provides hands-on experience to young students in delivering community service.
+                    </p>
+                    <p class="text-lg mb-4">
+                        Our unit organizes various activities including awareness campaigns, blood donation camps, tree plantation drives, and rural development programs to inculcate social consciousness and responsibility among students.
+                    </p>
+                    <a href="About_Us.html" class="section-btn">Learn More About Us</a>
+                </div>
+                <div class="section-card">
+                    <h3 class="text-xl font-semibold mb-4">Key Objectives</h3>
+                    <ul class="space-y-3">
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Develop leadership qualities</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Promote social harmony</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Environmental conservation</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Rural development</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Health awareness</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Education promotion</li>
+                    </ul>
+                    <a href="About_Us.html" class="section-btn">View Full Objectives</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Activities</h2>
+            <div class="grid-3">
+                <div class="section-card text-center">
+                    <div class="card-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Health Awareness</h3>
+                    <p>We conduct health camps, blood donation drives, and awareness programs on various health issues including COVID-19 prevention.</p>
+                </div>
+                <div class="section-card text-center">
+                    <div class="card-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Environment</h3>
+                    <p>Tree plantation, cleanliness drives, and awareness campaigns about waste management and sustainable development.</p>
+                </div>
+                <div class="section-card text-center">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Education</h3>
+                    <p>Teaching underprivileged children, digital literacy programs, and career guidance for rural students.</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="Activity.html" class="section-btn">Explore All Activities</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="section">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="grid-3">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bc5443d7-9443-4116-a575-ba5452d3b137.png" alt="Blood donation camp" />
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Blood Donation Camp</h3>
+                        <p class="event-date">24th July 2023 • Main Campus</p>
+                        <p class="event-description">Join our annual blood donation drive in collaboration with Red Cross Society.</p>
+                        <button class="event-btn register-btn">Register Now</button>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/860432be-eff4-4823-bba4-ef1dc6e6cff0.png" alt="Tree plantation" />
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Green Campus Drive</h3>
+                        <p class="event-date">5th August 2023 • University Garden</p>
+                        <p class="event-description">Participate in our tree plantation campaign to make our campus greener.</p>
+                        <button class="event-btn learn-btn">Learn More</button>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78d32504-03cb-4329-b9d1-0803bac5348b.png" alt="Rural development" />
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Rural Development Program</h3>
+                        <p class="event-date">12th-18th August 2023 • Vadgam Village</p>
+                        <p class="event-description">7-day residential program for village development and community service.</p>
+                        <button class="event-btn join-btn">Join Team</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="Activity.html" class="section-btn">View All Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">Gallery of Activities</h2>
+            <div class="grid-3">
+                <div class="gallery-card">
+                    <div class="gallery-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/52a4c85a-719f-43ba-88cb-6de1007ee59b.png" alt="Tree plantation drive" />
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-title">Tree Plantation Drive</h3>
+                        <p class="gallery-description">Students actively participating in our green campus initiative.</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9cb1fef5-2a69-4589-b9cb-a5cd80157652.png" alt="Cleanliness campaign" />
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-title">Cleanliness Campaign</h3>
+                        <p class="gallery-description">NSS volunteers working together for a cleaner environment.</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2f5bbdc-6305-47a8-8211-853bc9ba1e74.png" alt="Blood donation camp" />
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="gallery-title">Blood Donation Camp</h3>
+                        <p class="gallery-description">Successful blood donation drive with community participation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="Activity.html" class="section-btn">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="grid-3">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Program Coordinator" />
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Dr. Mahendra Singh Solanki</h3>
+                        <p class="team-role">Program Coordinator</p>
+                        <p class="team-description">Leads the NSS programs and ensures smooth execution of all activities.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Program Officer" />
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Mr. Vishal Kumar Parmar</h3>
+                        <p class="team-role">Program Officer</p>
+                        <p class="team-description">Manages volunteer recruitment and engagement for NSS events.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Student Coordinator" />
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Student Coordinator</h3>
+                        <p class="team-role">Student Representative</p>
+                        <p class="team-description">Coordinates logistics and planning for NSS events and campaigns.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="contact.html" class="section-btn">Contact Our Team</a>
+            </div>
+        </div>
+    </section>
+
+
     
-
     <script>
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elements
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
 
-        mobileMenu.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            
-            // Animate hamburger menu
-            const spans = mobileMenu.querySelectorAll('span');
-            if (navMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
-            } else {
-                spans[0].style.transform = 'rotate(0) translate(0, 0)';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'rotate(0) translate(0, 0)';
-            }
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+            // Mobile menu toggle
+            mobileMenu.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                
                 const spans = mobileMenu.querySelectorAll('span');
-                spans[0].style.transform = 'rotate(0) translate(0, 0)';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+                if (navMenu.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                } else {
+                    spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'rotate(0) translate(0, 0)';
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Active link highlighting
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
             });
         });
-
-        // Tab functionality
-        document.querySelectorAll('.tab-link').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all tabs and content
-                document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Show corresponding content
-                const targetTab = this.getAttribute('data-tab');
-                document.getElementById(targetTab).classList.add('active');
-            });
-        });
-
-        // Active link highlighting
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Remove active class from all links
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                
-                // Add active class to clicked link
-                this.classList.add('active');
-            });
-      });
-  </script>
+    </script>
 </body>
 </html>
