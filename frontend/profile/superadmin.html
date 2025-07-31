@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">Admin Panel</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/profile/superadmin.html">Requests</a></li>
+        <li class="nav-item"><a class="nav-link" href="/profile/view.html">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="logoutBtn">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">Super Admin Dashboard</h2>
+    <div id="dashboardMsg"></div>
+    <div class="card">
+      <div class="card-header">Pending Admin Requests</div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Admin Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="pendingTableBody">
+              <tr><td colspan="6" class="text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('token');
+      window.location.href = '/auth/login.html';
+    });
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/auth/login.html';
+    }
+
+    async function fetchPendingAdmins() {
+      const res = await fetch('/api/admin/pending', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const data = await res.json();
+      const tbody = document.getElementById('pendingTableBody');
+      if (res.ok) {
+        if (data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center">No pending requests.</td></tr>';
+        } else {
+          tbody.innerHTML = data.map(admin => `
+            <tr>
+              <td><img src="/uploads/${admin.photo}" width="50" height="50" class="rounded-circle" alt="Photo"></td>
+              <td>${admin.fullName}</td>
+              <td>${admin.email}</td>
+              <td>${admin.mobile}</td>
+              <td>${admin.adminType}</td>
+              <td>
+                <button class="btn btn-success btn-sm me-1" onclick="approveAdmin('${admin._id}', this)">Approve</button>
+                <button class="btn btn-danger btn-sm" onclick="rejectAdmin('${admin._id}', this)">Reject</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } else {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-danger text-center">${data.message || 'Failed to load requests.'}</td></tr>`;
+      }
+    }
+
+    async function approveAdmin(adminId, btn) {
+      btn.disabled = true;
+      btn.innerText = 'Approving...';
+      const res = await fetch(`/api/admin/approve/${adminId}`, {
+        method: 'PUT',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const data = await res.json();
+      if (res.ok) {
+        document.getElementById('dashboardMsg').innerHTML = `<div class='alert alert-success'>${data.message}</div>`;
+        fetchPendingAdmins();
+      } else {
+        document.getElementById('dashboardMsg').innerHTML = `<div class='alert alert-danger'>${data.message || 'Approval failed.'}</div>`;
+        btn.disabled = false;
+        btn.innerText = 'Approve';
+      }
+    }
+
+    async function rejectAdmin(adminId, btn) {
+      btn.disabled = true;
+      btn.innerText = 'Rejecting...';
+      const res = await fetch(`/api/admin/reject/${adminId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const data = await res.json();
+      if (res.ok) {
+        document.getElementById('dashboardMsg').innerHTML = `<div class='alert alert-success'>${data.message}</div>`;
+        fetchPendingAdmins();
+      } else {
+        document.getElementById('dashboardMsg').innerHTML = `<div class='alert alert-danger'>${data.message || 'Rejection failed.'}</div>`;
+        btn.disabled = false;
+        btn.innerText = 'Reject';
+      }
+    }
+
+    fetchPendingAdmins();
+  </script>
+</body>
+</html> 

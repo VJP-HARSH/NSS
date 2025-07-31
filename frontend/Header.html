@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSS Portal - Professional Header</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;    
+        }
+    /* #navbar-custom {
+      background: linear-gradient(135deg, #0d6efd 0%, #084298 100%);
+    } */
+        /* body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        } */
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .auth-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .login-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Content area for demo */
+        .content {
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .auth-section {
+                position: fixed;
+                top: 200px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: 0.3s;
+                pointer-events: none;
+            }
+
+            .nav-menu.active ~ .auth-section {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="navbar-custom">
+        <nav class="nav-container">
+            <a href="#" class="logo">NSS Portal</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="auth-section">
+                <a href="#" class="login-btn">Login</a>
+                <a href="#" class="register-btn">Register</a>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- <main class="content">
+        <h1>Welcome to NSS Portal</h1>
+        <p>National Service Scheme - Serving the Nation with Pride</p>
+    </main> -->
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Animate hamburger menu
+            const spans = mobileMenu.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = mobileMenu.querySelectorAll('span');
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            });
+        });
+
+        // Active link highlighting
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
