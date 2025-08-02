@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSS Portal | National Service Scheme</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSS Portal | National Service Scheme</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <style>
+  <style>
         * {
             margin: 0;
             padding: 0;
@@ -38,15 +38,77 @@
             z-index: 1;
         }
 
-        /* Header Styles */
+        /* Enhanced Animations and Effects */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        /* Enhanced Header */
         .header {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -60,11 +122,20 @@
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 30px;
+            font-weight: 800;
             color: #1e3c72;
             text-decoration: none;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #1e3c72, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-menu {
@@ -79,13 +150,13 @@
 
         .nav-link {
             display: block;
-            padding: 12px 24px;
+            padding: 15px 28px;
             text-decoration: none;
             color: #2c3e50;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 16px;
             transition: all 0.3s ease;
-            border-radius: 8px;
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
         }
@@ -99,7 +170,7 @@
         .nav-link.active {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
         }
 
         .nav-link::before {
@@ -175,15 +246,19 @@
             border-radius: 2px;
         }
 
-        /* Hero Section */
+        /* Enhanced Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
-            padding: 100px 0;
+            padding: 140px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -196,99 +271,125 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-                              radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-                              radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
-            background-size: 300px 300px, 400px 400px, 350px 350px, 450px 450px;
+            background: rgba(0, 0, 0, 0.3);
             pointer-events: none;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
             z-index: 2;
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+            background: linear-gradient(45deg, #ffffff, #ffd700, #ffffff, #ffed4e);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 4s ease-in-out infinite, gradientShift 6s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            line-height: 1.1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
 
         .hero-separator {
-            width: 100px;
-            height: 2px;
-            background: white;
-            margin: 30px auto;
-            opacity: 0.7;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffd700, #ffed4e, #ffd700, transparent);
+            margin: 35px auto;
+            opacity: 0.9;
+            animation: fadeInUp 1.2s ease-out 0.7s both;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+            border-radius: 2px;
         }
 
         .hero-motto {
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             font-style: italic;
-            opacity: 0.8;
-            margin-top: 20px;
+            opacity: 0.9;
+            margin-top: 25px;
+            animation: fadeInUp 1.2s ease-out 1s both;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            font-weight: 500;
         }
 
         .hero-buttons {
-            margin-top: 40px;
+            margin-top: 60px;
+            animation: fadeInUp 1.2s ease-out 1.3s both;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .hero-btn {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 20px 40px;
             margin: 10px;
             text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
+            border-radius: 50px;
+            font-weight: 700;
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
         }
 
         .hero-btn-primary {
-            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, #e53e3e, #c53030);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            border: none;
+            box-shadow: 0 10px 30px rgba(229, 62, 62, 0.4);
         }
 
         .hero-btn-primary:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: linear-gradient(135deg, #c53030, #e53e3e);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(229, 62, 62, 0.6);
         }
 
         .hero-btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #3182ce, #2c5aa0);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            border: none;
+            box-shadow: 0 10px 30px rgba(49, 130, 206, 0.4);
         }
 
         .hero-btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #2c5aa0, #3182ce);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(49, 130, 206, 0.6);
         }
 
-        /* Section Styles */
+        /* Enhanced Section Styles */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
             position: relative;
             z-index: 2;
         }
@@ -299,37 +400,65 @@
             padding: 0 20px;
         }
 
+        /* Enhanced Section Titles */
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            font-weight: 600;
+            font-size: 3.5rem;
+            font-weight: 900;
             color: #ffffff;
-            margin-bottom: 50px;
-            text-shadow: 0 2px 8px rgba(30, 60, 114, 0.3);
+            margin-bottom: 70px;
+            text-shadow: 0 4px 20px rgba(30, 60, 114, 0.5);
+            background: linear-gradient(45deg, #ffffff, #ffd700, #ffffff, #ffed4e);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 4s ease-in-out infinite, gradientShift 6s ease-in-out infinite;
+            letter-spacing: -2px;
         }
 
+        /* Enhanced Section Cards */
         .section-card {
-            background: rgba(255, 255, 255, 0.07);
-            border-radius: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            padding: 3rem;
             margin-bottom: 2rem;
             color: #f8f9fa;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(6px);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.8s;
+        }
+
+        .section-card:hover::before {
+            left: 100%;
         }
 
         .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+            border-color: rgba(255, 215, 0, 0.4);
         }
 
         .card-icon {
             color: #ffd700;
-            text-shadow: 0 2px 8px rgba(30, 60, 114, 0.3);
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            animation: float 4s ease-in-out infinite;
         }
 
         /* Grid Layouts */
@@ -395,8 +524,8 @@
             font-size: 32px;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.2s;
-        }
+      transition: color 0.2s;
+    }
 
         .close-btn:hover,
         .close-btn:focus {
@@ -545,95 +674,130 @@
             }
         }
 
-        /* Event Cards */
+        /* Enhanced Event Cards */
         .event-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .event-card:hover::before {
+            transform: scaleX(1);
         }
 
         .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(-15px) scale(1.04);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
         }
 
         .event-image {
-            height: 200px;
+            height: 250px;
             overflow: hidden;
+            position: relative;
         }
 
         .event-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.15);
         }
 
         .event-content {
-            padding: 20px;
-            background: #1e3c72;
+            padding: 30px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
         }
 
         .event-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
             color: white;
         }
 
         .event-date {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #a0aec0;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
+            font-weight: 500;
         }
 
         .event-description {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 16px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
             color: #e2e8f0;
         }
 
         .event-btn {
-            padding: 8px 16px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 0.9rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
         .register-btn {
-            background: #e53e3e;
+            background: linear-gradient(135deg, #e53e3e, #c53030);
             color: white;
+            box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
         }
 
         .register-btn:hover {
-            background: #c53030;
+            background: linear-gradient(135deg, #c53030, #e53e3e);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(229, 62, 62, 0.5);
         }
 
         .learn-btn {
-            background: #38a169;
+            background: linear-gradient(135deg, #38a169, #2f855a);
             color: white;
+            box-shadow: 0 6px 20px rgba(56, 161, 105, 0.4);
         }
 
         .learn-btn:hover {
-            background: #2f855a;
+            background: linear-gradient(135deg, #2f855a, #38a169);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(56, 161, 105, 0.5);
         }
 
         .join-btn {
-            background: #3182ce;
+            background: linear-gradient(135deg, #3182ce, #2c5aa0);
             color: white;
+            box-shadow: 0 6px 20px rgba(49, 130, 206, 0.4);
         }
 
         .join-btn:hover {
-            background: #2c5aa0;
+            background: linear-gradient(135deg, #2c5aa0, #3182ce);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.5);
         }
 
-        /* Gallery Cards */
+        /* Enhanced Gallery Cards */
         .gallery-card {
             background: white;
             border-radius: 12px;
@@ -797,26 +961,43 @@
             color: white;
         }
 
-        /* Section Buttons */
+        /* Enhanced Section Buttons */
         .section-btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 18px 35px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            border-radius: 35px;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.5s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            margin-top: 20px;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: left 0.6s;
+        }
+
+        .section-btn:hover::before {
+            left: 100%;
         }
 
         .section-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
             background: linear-gradient(135deg, #764ba2, #667eea);
         }
 
@@ -827,7 +1008,313 @@
         .text-center {
             text-align: center;
         }
-    </style>
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Gallery and Team Cards */
+        .gallery-card, .team-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .gallery-card::before, .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-card:hover::before, .team-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .gallery-card:hover, .team-card:hover {
+            transform: translateY(-15px) scale(1.04);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .gallery-image, .team-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-image img, .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-card:hover .gallery-image img, .team-card:hover .team-image img {
+            transform: scale(1.15);
+        }
+
+        .gallery-content, .team-content {
+            padding: 30px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .gallery-title, .team-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .gallery-description, .team-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            color: #a0aec0;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+
+        /* Enhanced Contact Cards */
+        .contact-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .contact-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px) scale(1.04);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .contact-content {
+            padding: 30px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .contact-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            color: #e2e8f0;
+            transition: all 0.4s ease;
+        }
+
+        .contact-item:hover {
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .contact-item i {
+            margin-right: 18px;
+            color: #ffd700;
+            width: 22px;
+            font-size: 1.2rem;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quick-link {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            font-size: 1.05rem;
+            padding: 10px 0;
+            border-radius: 10px;
+            padding-left: 12px;
+        }
+
+        .quick-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(8px);
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .hero-motto {
+                font-size: 1.3rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .hero-btn {
+                min-width: 250px;
+                padding: 18px 35px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                letter-spacing: -1px;
+            }
+
+            .section-card {
+                padding: 2rem;
+            }
+
+            .event-card, .gallery-card, .team-card, .contact-card {
+                margin-bottom: 2rem;
+            }
+
+            .event-image, .gallery-image, .team-image {
+                height: 200px;
+            }
+
+            .hero-btn {
+                padding: 16px 30px;
+                font-size: 14px;
+                margin: 8px 5px;
+            }
+
+            .section-btn {
+                padding: 15px 30px;
+                font-size: 14px;
+            }
+
+            .card-icon {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .hero-btn {
+                min-width: 200px;
+                padding: 14px 25px;
+                font-size: 13px;
+            }
+        }
+
+        /* Professional Loading States */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Enhanced Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Professional Hover Effects */
+        .professional-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .professional-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+  </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -848,6 +1335,9 @@
                 <li class="nav-item">
                     <a href="contact.html" class="nav-link">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a href="gallary.html" class="nav-link">gallery</a>
+                </li>
             </ul>
 
             <div class="auth-section">
@@ -867,25 +1357,25 @@
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">National Service Scheme</h1>
-            <p class="hero-subtitle">Building Character Through Service</p>
+            <p class="hero-subtitle">Silver Oak University</p>
             <div class="hero-separator"></div>
-            <p class="hero-motto">"Not Me But You"</p>
+            <p class="hero-motto">"Not Me But You" - Empowering Students Through Community Service</p>
             <div class="hero-buttons">
-                <a href="#about" class="hero-btn hero-btn-primary">Learn More</a>
-                <a href="auth/register.html" class="hero-btn hero-btn-secondary" id="heroRegisterBtn">Join NSS Today</a>
+                <a href="auth/register.html" class="hero-btn hero-btn-primary">Join NSS Today</a>
+                <a href="#about" class="hero-btn hero-btn-secondary">Learn More</a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About NSS SilverOak</h2>
+    <div class="container">
+            <h2 class="section-title">About NSS </h2>
             <div class="grid-2">
                 <div class="section-card">
                     <h3 class="text-xl font-semibold mb-4">Our Mission</h3>
                     <p class="text-lg mb-4">
-                        The National Service Scheme (NSS) unit of SilverOak University is committed to developing students' personality through community service. NSS provides hands-on experience to young students in delivering community service.
+                        The National Service Scheme (NSS) unit of Silver Oak University is committed to developing students' personality through community service. NSS provides hands-on experience to young students in delivering community service.
                     </p>
                     <p class="text-lg mb-4">
                         Our unit organizes various activities including awareness campaigns, blood donation camps, tree plantation drives, and rural development programs to inculcate social consciousness and responsibility among students.
@@ -901,7 +1391,7 @@
                         <li><i class="fas fa-check text-green-400 mr-2"></i>Rural development</li>
                         <li><i class="fas fa-check text-green-400 mr-2"></i>Health awareness</li>
                         <li><i class="fas fa-check text-green-400 mr-2"></i>Education promotion</li>
-                    </ul>
+        </ul>
                     <a href="About_Us.html" class="section-btn">View Full Objectives</a>
                 </div>
             </div>
@@ -982,8 +1472,8 @@
             </div>
             <div class="text-center mt-8">
                 <a href="Activity.html" class="section-btn">View All Events</a>
-            </div>
-        </div>
+      </div>
+    </div>
     </section>
 
     <!-- Gallery Section -->
@@ -1021,7 +1511,7 @@
             </div>
             <div class="text-center mt-8">
                 <a href="Activity.html" class="section-btn">View Full Gallery</a>
-            </div>
+          </div>
         </div>
     </section>
 
@@ -1063,13 +1553,13 @@
             </div>
             <div class="text-center mt-8">
                 <a href="contact.html" class="section-btn">Contact Our Team</a>
-            </div>
         </div>
+      </div>
     </section>
 
 
-    
-    <script>
+
+  <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Elements
             const mobileMenu = document.getElementById('mobile-menu');
@@ -1110,6 +1600,105 @@
                 link.addEventListener('click', function(e) {
                     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
+                });
+            });
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Add animation classes to elements
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                const cards = section.querySelectorAll('.section-card, .event-card, .gallery-card, .team-card');
+                cards.forEach((card, cardIndex) => {
+                    if (index % 2 === 0) {
+                        card.classList.add('slide-in-left');
+                    } else {
+                        card.classList.add('slide-in-right');
+                    }
+                    observer.observe(card);
+                });
+            });
+
+            // Add fade-in animation to section titles
+            const titles = document.querySelectorAll('.section-title');
+            titles.forEach(title => {
+                title.classList.add('fade-in');
+                observer.observe(title);
+            });
+
+            // Add animation to section buttons
+            const buttons = document.querySelectorAll('.section-btn');
+            buttons.forEach(button => {
+                button.classList.add('fade-in');
+                observer.observe(button);
+            });
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-section');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.2)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.15)';
+                }
+            });
+
+            // Add hover effects to cards
+            const allCards = document.querySelectorAll('.section-card, .event-card, .gallery-card, .team-card');
+            allCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add click effects to buttons
+            const allButtons = document.querySelectorAll('.hero-btn, .section-btn, .event-btn');
+            allButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
                 });
             });
         });
