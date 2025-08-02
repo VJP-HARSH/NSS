@@ -99,7 +99,41 @@
     </style>
 </head>
 <body>
-    <!-- Header.html import -->
+    <header class="header" id="navbar-custom">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">NSS Portal</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="About_Us.html" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Activity.html" class="nav-link">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallary.html" class="nav-link">gallery</a>
+                </li>
+            </ul>
+
+            <div class="auth-section">
+                <a href="auth/login.html" class="login-btn">Login</a>
+                <a href="auth/register.html" class="register-btn">Register</a>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+   
     <div id="header-placeholder"></div>
     <script>
       fetch('Header.html')
@@ -116,23 +150,23 @@
         <h1 class="gallery-header">NSS Activities Gallery</h1>
         <div class="gallery-grid">
             <div class="gallery-item" data-img="uploads/Blood_camp1.jpg">
-                <img src="../backend/uploads/Blood_camp1.jpg" alt="Blood Donation Camp" class="gallery-img">
+                <img src="uploads/Blood_camp1.jpg" alt="Blood Donation Camp" class="gallery-img">
                 <div class="gallery-caption">Blood Donation Camp</div>
             </div>
-            <div class="gallery-item" data-img="uploads/1753290887727-Screenshot%202025-07-19%20123158.png">
-                <img src="uploads/1753290887727-Screenshot%202025-07-19%20123158.png" alt="Tree Plantation Drive" class="gallery-img">
+            <div class="gallery-item" data-img="uploads/Narmda1.jpg">
+                <img src="uploads/Narmda1.jpg" alt="Tree Plantation Drive" class="gallery-img">
                 <div class="gallery-caption">Tree Plantation Drive</div>
             </div>
-            <div class="gallery-item" data-img="uploads/1753293352526-Screenshot%202025-07-19%20123605.png">
-                <img src="uploads/1753293352526-Screenshot%202025-07-19%20123605.png" alt="Cleanliness Drive" class="gallery-img">
+            <div class="gallery-item" data-img="uploads/Narmda2.jpg">
+                <img src="uploads/Narmda2.jpg" alt="Cleanliness Drive" class="gallery-img">
                 <div class="gallery-caption">Cleanliness Drive</div>
             </div>
-            <div class="gallery-item" data-img="uploads/Yoga1.jpg">
+            <div class="gallery-item" data-img="../uploads/Yoga1.jpg">
                 <img src="uploads/Yoga1.jpg" alt="Yoga Day Celebration" class="gallery-img">
                 <div class="gallery-caption">Yoga Day Celebration</div>
             </div>
-            <div class="gallery-item" data-img="uploads/default.png">
-                <img src="uploads/default.png" alt="NSS Volunteers" class="gallery-img">
+            <div class="gallery-item" data-img="../uploads/Narmda4.jpg">
+                <img src="uploads/Narmda4.jpg" alt="NSS Volunteers" class="gallery-img">
                 <div class="gallery-caption">NSS Volunteers</div>
             </div>
         </div>
