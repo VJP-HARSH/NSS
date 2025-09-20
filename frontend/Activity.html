@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSS Activities | National Service Scheme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        /* Enhanced Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1e3c72;
+            text-decoration: none;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #1e3c72, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 15px 28px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .auth-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .login-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Header Section */
+        .header-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #ffffff, #ffd700, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .header-info {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .header-info p {
+            margin: 12px 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .established-year {
+            background: linear-gradient(135deg, #2a5298, #667eea);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(42, 82, 152, 0.3);
+        }
+
+        /* Enhanced Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .activity-category {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        }
+
+        .activity-category::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .activity-category:hover::after {
+            left: 100%;
+        }
+
+        .activity-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin: 0;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f1f3f4;
+            position: relative;
+            padding-left: 30px;
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: #2a5298;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .activity-item:hover {
+            color: #2a5298;
+            padding-left: 35px;
+            transform: translateX(5px);
+        }
+
+        /* Enhanced Special Sections */
+        .highlight-section {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border-radius: 25px;
+            padding: 50px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .highlight-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            font-weight: 700;
+        }
+
+        .highlight-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Statistics */
+        .stats-section {
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            margin: 50px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 35px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(42, 82, 152, 0.05), rgba(42, 82, 152, 0.1));
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .stat-item:hover::before {
+            left: 100%;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1e3c72;
+            display: block;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+            margin-top: 80px;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Enhanced Search & Filter */
+        .search-section {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .search-box {
+            max-width: 450px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .search-input:focus {
+            border-color: #2a5298;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Loading Animation */
+        .activity-category {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .activity-category:nth-child(1) { animation-delay: 0.1s; }
+        .activity-category:nth-child(2) { animation-delay: 0.2s; }
+        .activity-category:nth-child(3) { animation-delay: 0.3s; }
+        .activity-category:nth-child(4) { animation-delay: 0.4s; }
+        .activity-category:nth-child(5) { animation-delay: 0.5s; }
+        .activity-category:nth-child(6) { animation-delay: 0.6s; }
+        .activity-category:nth-child(7) { animation-delay: 0.7s; }
+        .activity-category:nth-child(8) { animation-delay: 0.8s; }
+        .activity-category:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .activity-category {
+                padding: 20px;
+            }
+            
+            .category-icon {
+                font-size: 2rem;
+            }
+            
+            .category-title {
+                font-size: 1.2rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .auth-section {
+                position: fixed;
+                top: 200px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: 0.3s;
+                pointer-events: none;
+            }
+
+            .nav-menu.active ~ .auth-section {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header" id="navbar-custom">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">NSS Portal</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="About_Us.html" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Activity.html" class="nav-link active">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallary.html" class="nav-link">gallery</a>
+                </li>
+            </ul>
+
+            <div class="auth-section">
+                <a href="auth/login.html" class="login-btn" id="loginBtn">Login</a>
+                <a href="auth/register.html" class="register-btn" id="registerBtn">Register</a>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="header-section">
+        <div class="container">
+            <div class="header-content">
+                <h1>NSS Activities</h1>
+                <div class="header-info">
+                    <div class="established-year">Established 2020</div>
+                    <p><strong>Coordinator:</strong> Dr. Mahendr Singh Solanki</p>
+                    <p><strong>Program Officer (Admin):</strong> Mr. Vishal Kumar Parmar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Search Section -->
+            <div class="search-section">
+                <h2 style="color: #1e3c72; margin-bottom: 20px;">Explore Our Activities</h2>
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search activities..." id="searchInput">
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-section">
+                <h2 style="text-align: center; color: #1e3c72; margin-bottom: 30px;">Our Impact</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <div class="stat-label">Activity Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <div class="stat-label">Different Programs</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <div class="stat-label">Students Involved</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5000+</span>
+                        <div class="stat-label">Lives Impacted</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activities Grid -->
+            <div class="activities-grid" id="activitiesGrid">
+                <div class="activity-category" data-category="health">
+                    <div class="category-header">
+                        <div class="category-icon">🩺</div>
+                        <h3 class="category-title">Health & Hygiene</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Blood Donation Camps</li>
+                        <li class="activity-item">Free Health Check-up Camps</li>
+                        <li class="activity-item">Eye/Ear/Dental Check-up Camps</li>
+                        <li class="activity-item">Sanitation and Cleanliness Drives</li>
+                        <li class="activity-item">Personal Hygiene Awareness Sessions</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="environment">
+                    <div class="category-header">
+                        <div class="category-icon">🌳</div>
+                        <h3 class="category-title">Environment & Sustainability</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Tree Plantation Drives ("Ek Ped Maa Ke Naam")</li>
+                        <li class="activity-item">Campus and Public Place Cleanliness</li>
+                        <li class="activity-item">Plastic-Free Campaigns</li>
+                        <li class="activity-item">Water Conservation Awareness</li>
+                        <li class="activity-item">E-Waste Collection Drives</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="education">
+                    <div class="category-header">
+                        <div class="category-icon">🧠</div>
+                        <h3 class="category-title">Education & Awareness</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Literacy Programs in Villages/Slums</li>
+                        <li class="activity-item">Digital Literacy Camps</li>
+                        <li class="activity-item">Voter Awareness Programs</li>
+                        <li class="activity-item">Educational Support for Underprivileged</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="fitness">
+                    <div class="category-header">
+                        <div class="category-icon">💪</div>
+                        <h3 class="category-title">Fitness & Youth Empowerment</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Yoga Day Celebration</li>
+                        <li class="activity-item">Fitness Awareness Rallies</li>
+                        <li class="activity-item">Self-Defense Training (especially for girls)</li>
+                        <li class="activity-item">Personality Development Programs</li>
+                        <li class="activity-item">Soft Skills/Leadership Workshops</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="social">
+                    <div class="category-header">
+                        <div class="category-icon">🧓</div>
+                        <h3 class="category-title">Social Welfare</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Orphanage/Old Age Home Visits</li>
+                        <li class="activity-item">Slum Area Visits and Welfare Activities</li>
+                        <li class="activity-item">Clothes/Food Distribution</li>
+                        <li class="activity-item">Helping the Differently Abled</li>
+                        <li class="activity-item">Community Support Programs</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="cleanliness">
+                    <div class="category-header">
+                        <div class="category-icon">🧹</div>
+                        <h3 class="category-title">Clean India Campaigns</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Clean Campus Initiative</li>
+                        <li class="activity-item">Clean Village/Street Campaigns</li>
+                        <li class="activity-item">Awareness Rally on Waste Management</li>
+                        <li class="activity-item">Swachh Bharat Abhiyan</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="legal">
+                    <div class="category-header">
+                        <div class="category-icon">⚖️</div>
+                        <h3 class="category-title">Legal & Civic Awareness</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Traffic Rules Awareness Camps</li>
+                        <li class="activity-item">Road Safety Week</li>
+                        <li class="activity-item">Anti-Drug Day Awareness</li>
+                        <li class="activity-item">Legal Rights Education</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="camps">
+                    <div class="category-header">
+                        <div class="category-icon">🏕️</div>
+                        <h3 class="category-title">Special 7-Day NSS Camp</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Village Survey and Baseline Study</li>
+                        <li class="activity-item">Health & Hygiene Awareness Drives</li>
+                        <li class="activity-item">Construction of Community Infrastructure</li>
+                        <li class="activity-item">Cultural Events with Social Messages</li>
+                        <li class="activity-item">Guest Lectures on Social Themes</li>
+                        <li class="activity-item">Skill Development Workshops</li>
+                        <li class="activity-item">Community Interaction Programs</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="national">
+                    <div class="category-header">
+                        <div class="category-icon">🇮🇳</div>
+                        <h3 class="category-title">National-Level Participation</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">National Integration Camp (NIC)</li>
+                        <li class="activity-item">Republic Day Parade Camp</li>
+                        <li class="activity-item">Pre-RD Camp</li>
+                        <li class="activity-item">Adventure Camp</li>
+                        <li class="activity-item">Youth Summit</li>
+                    </ul>
+                </div>
+
+                <div class="activity-category" data-category="events">
+                    <div class="category-header">
+                        <div class="category-icon">📅</div>
+                        <h3 class="category-title">Event-Based Activities</h3>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">Independence Day & Republic Day Programs</li>
+                        <li class="activity-item">NSS Foundation Day (24th September)</li>
+                        <li class="activity-item">Gandhi Jayanti Cleanliness Drive</li>
+                        <li class="activity-item">Cultural Competitions</li>
+                        <li class="activity-item">Essay & Poster Making Contests</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Highlight Section -->
+            <div class="highlight-section">
+                <h2>Join the Movement</h2>
+                <p>Be part of India's largest student volunteer program. Make a difference in your community while developing leadership skills and social consciousness.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 National Service Scheme. Committed to building a better India through service and social responsibility.</p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Animate hamburger menu
+            const spans = mobileMenu.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = mobileMenu.querySelectorAll('span');
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const categories = document.querySelectorAll('.activity-category');
+            
+            categories.forEach(category => {
+                const categoryText = category.textContent.toLowerCase();
+                if (categoryText.includes(searchTerm)) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        });
+
+        // Add intersection observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.activity-category').forEach(category => {
+            observer.observe(category);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!-- All CSS is now inside <style> in <head>, and JS is at the end of <body> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Officer Dashboard | NSS Portal</title>
+  <style>
+    /* Responsive table for Upcoming Events */
+    #upcoming-events-table {
+      width: 100%;
+      min-width: 480px;
+      max-width: 700px;
+      background: #f8fafc;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.06);
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+    }
+    #upcoming-events-table th, #upcoming-events-table td {
+      word-break: break-word;
+    }
+    @media (max-width: 900px) {
+      #upcoming-events-table, #upcoming-events-table thead, #upcoming-events-table tbody, #upcoming-events-table th, #upcoming-events-table td, #upcoming-events-table tr {
+        display: block;
+        width: 100%;
+      }
+      #upcoming-events-table thead {
+        display: none;
+      }
+      #upcoming-events-table tr {
+        margin-bottom: 18px;
+        background: #f8fafc;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(102,126,234,0.06);
+        padding: 10px 0;
+      }
+      #upcoming-events-table td {
+        padding: 10px 12px;
+        text-align: left;
+        position: relative;
+        font-size: 1rem;
+      }
+      #upcoming-events-table td:before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #764ba2;
+        display: block;
+        margin-bottom: 4px;
+      }
+    }
+    /* Upcoming Events List Styling */
+    #upcoming-events-list {
+      margin-top: 10px;
+      border-radius: 10px;
+      background: #f8fafc;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.06);
+      padding: 18px 24px 10px 24px;
+      max-width: 600px;
+    }
+    .event-item {
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e0e7ff;
+      font-size: 1.08rem;
+      color: #2c3e50;
+      transition: background 0.2s;
+    }
+    .event-item:last-child {
+      border-bottom: none;
+    }
+    .event-item strong {
+      color: #2c3e50;
+      font-size: 1.13rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .event-item span {
+      color: #667eea;
+      font-size: 1.01rem;
+      margin-left: 6px;
+    }
+    @media (max-width: 700px) {
+      #upcoming-events-list {
+        padding: 10px 4px 6px 4px;
+        max-width: 100vw;
+      }
+    }
+    /* Modal styles for Add Event */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100vw; height: 100vh; overflow: auto; background: rgba(44,62,80,0.25); align-items: center; justify-content: center; }
+    .modal-content { background: #fff; margin: auto; padding: 32px 28px 24px 28px; border-radius: 12px; box-shadow: 0 4px 24px rgba(30,60,114,0.18); width: 100%; max-width: 420px; position: relative; display: flex; flex-direction: column; gap: 18px; }
+    .close-modal { position: absolute; top: 12px; right: 18px; font-size: 1.5rem; color: #764ba2; cursor: pointer; font-weight: bold; }
+    .modal-content label { font-weight: 500; color: #667eea; margin-bottom: 4px; }
+    .modal-content input, .modal-content textarea { width: 100%; padding: 8px 10px; border: 1px solid #e0e7ff; border-radius: 6px; font-size: 1rem; margin-bottom: 10px; background: #f8fafc; }
+  .modal-content select { width: 100%; padding: 8px 10px; border: 1px solid #e0e7ff; border-radius: 6px; font-size: 1rem; margin-bottom: 10px; background: #f8fafc; color: #2c3e50; transition: border 0.2s; }
+  .modal-content select:focus { border: 1.5px solid #764ba2; outline: none; }
+    .modal-content button[type="submit"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; border: none; border-radius: 6px; padding: 10px 0; font-size: 1.08rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+    .modal-content button[type="submit"]:hover { background: linear-gradient(90deg, #764ba2, #667eea); }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+      margin: 0;
+      min-height: 100vh;
+      color: #2c3e50;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .header {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: #fff;
+      padding: 24px 0 16px 0;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 18px rgba(102, 126, 234, 0.07);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 100;
+    }
+    .dashboard-layout {
+      display: flex;
+      flex: 1 1 auto;
+      min-height: 0;
+      margin-top: 80px; /* height of header */
+      height: calc(100vh - 80px);
+    }
+    .sidebar {
+      width: 220px;
+      background: linear-gradient(135deg, #667eea 80%, #764ba2 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 0 0 0;
+      box-shadow: 2px 0 18px rgba(102, 126, 234, 0.07);
+      height: 100%;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      z-index: 99;
+      min-height: 0;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 32px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      border-left: 4px solid transparent;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      margin-bottom: 2px;
+    }
+    .sidebar a.active, .sidebar a:hover {
+      background: rgba(255,255,255,0.18);
+      border-bottom: 4px solid #ffd700;
+      border-left: none;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(255,215,0,0.08);
+    }
+    .sidebar .sidebar-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin: 0 0 30px 32px;
+      letter-spacing: 1px;
+    }
+    .main-content {
+      flex: 1 1 auto;
+      padding: 50px 40px;
+      background: #fff;
+      border-radius: 0 18px 18px 0;
+      box-shadow: 0 4px 24px rgba(30,60,114,0.10);
+      margin: 40px 0 40px 0;
+      min-width: 0;
+      margin-left: 220px;
+      height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+    .officer-info-card {
+      background: linear-gradient(90deg, #e0e7ff 60%, #f8fafc 100%);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.07);
+      padding: 24px 32px 18px 32px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .officer-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #667eea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 2.2rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.10);
+    }
+    .officer-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .officer-details span {
+      font-size: 1.08rem;
+      color: #2c3e50;
+    }
+    .officer-details .officer-name {
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: #667eea;
+    }
+    @media (max-width: 900px) {
+      .header {
+        font-size: 1.1rem;
+        padding: 12px 0 8px 0;
+        min-height: 48px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        z-index: 120;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .profile-badge-container {
+        position: static;
+        margin-right: 12px;
+        margin-left: auto;
+        top: unset;
+        right: unset;
+        display: flex;
+        align-items: center;
+      }
+      .profile-badge {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        margin-left: 8px;
+      }
+      .profile-dropdown {
+        top: 40px;
+        min-width: 100px;
+        font-size: 0.95rem;
+      }
+      .dashboard-layout {
+        flex-direction: column;
+        margin-top: 48px;
+        height: auto;
+      }
+      .sidebar {
+        flex-direction: row;
+        width: 100vw;
+        min-height: unset;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        overflow-x: auto;
+        position: fixed;
+        top: 48px;
+        left: 0;
+        height: 48px;
+        z-index: 110;
+        background: linear-gradient(135deg, #667eea 80%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+      }
+      .sidebar a {
+        flex: 1 1 100px;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 0.97rem;
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        margin-bottom: 0;
+        min-width: 90px;
+        white-space: nowrap;
+      }
+      .sidebar a.active, .sidebar a:hover {
+        background: rgba(255,255,255,0.10);
+        border-bottom: 4px solid #ffd700;
+        border-left: none;
+      }
+      .sidebar .sidebar-title {
+        display: none;
+      }
+      .main-content {
+        border-radius: 0 0 18px 18px;
+        margin: 0;
+        padding: 12px 2px;
+        margin-left: 0;
+        margin-top: 48px;
+        height: auto;
+      }
+      body, .main-content, .dashboard-section, .modal-content, .sidebar a {
+        font-size: 0.97rem !important;
+      }
+      h3, h4 {
+        font-size: 1.08rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Program Officer Dashboard
+    <div class="profile-badge-container">
+      <div class="profile-badge" id="profileBadge">PO</div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <a href="#" id="editProfile">Edit</a>
+        <a href="../index.html" id="logoutProfile">Logout</a>
+      </div>
+    </div>
+  </div>
+  <style>
+    .profile-badge-container {
+      position: absolute;
+      top: 18px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      z-index: 200;
+    }
+    .profile-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #764ba2 60%, #667eea 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      border: 2px solid #fff;
+      transition: box-shadow 0.2s;
+    }
+    .profile-badge:hover {
+      box-shadow: 0 4px 16px rgba(118,75,162,0.18);
+    }
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      top: 54px;
+      right: 0;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(102,126,234,0.13);
+      min-width: 120px;
+      flex-direction: column;
+      z-index: 201;
+      padding: 8px 0;
+    }
+    .profile-dropdown a {
+      color: #764ba2;
+      text-decoration: none;
+      padding: 10px 18px;
+      display: block;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .profile-dropdown a:hover {
+      background: #e0e7ff;
+      color: #667eea;
+    }
+  </style>
+  <script>
+    // Profile badge dropdown logic
+    const badge = document.getElementById('profileBadge');
+    const dropdown = document.getElementById('profileDropdown');
+    badge.addEventListener('mouseenter', () => {
+      dropdown.style.display = 'flex';
+    });
+    badge.addEventListener('mouseleave', () => {
+      setTimeout(() => { if (!dropdown.matches(':hover')) dropdown.style.display = 'none'; }, 150);
+    });
+    dropdown.addEventListener('mouseleave', () => {
+      dropdown.style.display = 'none';
+    });
+    dropdown.addEventListener('mouseenter', () => {
+      dropdown.style.display = 'flex';
+    });
+    // Edit profile click (demo: alert)
+    document.getElementById('editProfile').onclick = function(e) {
+      e.preventDefault();
+      alert('Edit profile clicked! (Demo only)');
+    };
+    // Logout click (redirects to index.html)
+    document.getElementById('logoutProfile').onclick = function() {
+      window.location.href = '../index.html';
+    };
+  </script>
+  <div class="dashboard-layout">
+    <nav class="sidebar">
+    <div class="sidebar-title">Menu</div>
+    <a href="#upcoming-events" class="active">Upcoming Events</a>
+    <a href="#add-event">Add Event</a>
+    <a href="#activity-calendar">Yearly Activity Calendar</a>
+    <a href="#event-reports">Event Reports</a>
+    <a href="../index.html">Logout</a>
+    </nav>
+    <main class="main-content">
+
+
+      <!-- Upcoming Events Section -->
+      <section id="upcoming-events-section" class="dashboard-section" style="display:none;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <h3 style="color:#764ba2; margin:0; font-size:1.4rem; font-weight:700; letter-spacing:0.5px;">Upcoming Events</h3>
+          <button type="button" onclick="document.querySelector('.sidebar a[href=\'#add-event\']').click();" style="background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:1.08rem;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.07);transition:background 0.2s;">+ Add Event</button>
+        </div>
+        <ul id="upcoming-events-list" style="list-style:none; padding:0; margin:0;"></ul>
+      <div style="overflow-x:auto;">
+        <table id="upcoming-events-table" style="width:100%;max-width:700px;background:#f8fafc;border-radius:10px;box-shadow:0 2px 8px rgba(102,126,234,0.06);border-collapse:separate;border-spacing:0;">
+          <thead>
+            <tr style="background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;">
+              <th style="padding:12px 8px;text-align:left;border-radius:10px 0 0 0;">Event Name</th>
+              <th style="padding:12px 8px;text-align:left;">Date</th>
+              <th style="padding:12px 8px;text-align:left;">Venue</th>
+              <th style="padding:12px 8px;text-align:left;">Time</th>
+              <th style="padding:12px 8px;text-align:left;border-radius:0 10px 0 0;">Description</th>
+            </tr>
+          </thead>
+          <tbody id="upcoming-events-tbody"></tbody>
+        </table>
+      </div>
+      </section>
+
+      <!-- Add Event Section -->
+      <section id="add-event-section" class="dashboard-section" style="display:none;">
+        <h3 style="color:#764ba2; margin-bottom:18px;">Add New Event</h3>
+  <form class="modal-content" style="position:static;box-shadow:none;max-width:600px;" id="add-event-form">
+          <label for="eventName">Event Name</label>
+          <input type="text" id="eventName" name="eventName" required>
+          <label for="eventDate">Date</label>
+          <input type="date" id="eventDate" name="eventDate" required>
+          <label for="eventVenue">Venue</label>
+          <input type="text" id="eventVenue" name="eventVenue" required>
+          <label for="eventTime">Time</label>
+          <input type="time" id="eventTime" name="eventTime" required>
+          <label for="eventDesc">Description</label>
+          <textarea id="eventDesc" name="eventDesc" rows="3" required></textarea>
+          <button type="submit">Add Event</button>
+        </form>
+      </section>
+
+      <!-- Yearly Activity Calendar Section -->
+      <section id="activity-calendar-section" class="dashboard-section" style="display:none;">
+        <h3 style="color:#764ba2; margin-bottom:18px;">Yearly Activity Calendar</h3>
+  <button type="button" onclick="downloadCalendar()" style="background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;border:none;border-radius:6px;padding:12px 28px;font-size:1.08rem;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(102,126,234,0.07);transition:background 0.2s;">Download Calendar (PDF)</button>
+        <p style="margin-top:18px;color:#555;">Download the yearly activity calendar for all planned NSS events and activities.</p>
+      </section>
+
+      <!-- Event Reports Section -->
+      <section id="event-reports-section" class="dashboard-section" style="display:none;">
+        <h3 style="color:#764ba2; margin-bottom:18px;">Event Reports</h3>
+        <ul id="event-reports-list" style="list-style:none; padding:0; margin:0;"></ul>
+        <h4 style="margin-top:32px;color:#764ba2;">Add Event Report</h4>
+  <form class="modal-content" style="position:static;box-shadow:none;max-width:600px;" id="add-report-form">
+          <label for="reportEventId">Event Name</label>
+          <select id="reportEventId" name="reportEventId" required>
+            <option value="">Select Event</option>
+          </select>
+          <label for="reportDate">Date</label>
+          <input type="date" id="reportDate" name="reportDate" required>
+          <label for="reportDesc">Report Description</label>
+          <textarea id="reportDesc" name="reportDesc" rows="3" required></textarea>
+          <button type="submit">Add Report</button>
+        </form>
+      </section>
+
+         
+        </div>
+      </section>
+    </main>
+  <style>
+    .dashboard-section { display: block; }
+  </style>
+  <script src="../assets/js/program_officer.js"></script>
+  <script>
+    // Sidebar navigation logic
+    const sidebarLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+    const sections = {
+      'upcoming-events': document.getElementById('upcoming-events-section'),
+      'add-event': document.getElementById('add-event-section'),
+      'activity-calendar': document.getElementById('activity-calendar-section'),
+      'event-reports': document.getElementById('event-reports-section')
+    };
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Remove active from all
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        // Hide all sections
+        Object.values(sections).forEach(sec => sec.style.display = 'none');
+        // Show selected section
+        const id = this.getAttribute('href').replace('#','');
+        if (sections[id]) sections[id].style.display = 'block';
+      });
+    });
+  // Show Upcoming Events by default
+  Object.entries(sections).forEach(([key, sec]) => sec.style.display = key==='upcoming-events'?'block':'none');
+  </script>
+  </div>
+  <script>
+    // Modal open/close logic (if you have modal)
+    // Add event form
+    document.getElementById('add-event-form').onsubmit = handleAddEvent;
+    // Add report form
+    document.getElementById('add-report-form').onsubmit = handleAddReport;
+    // Initial fetch
+    fetchEvents();
+    fetchReports();
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | NSS Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+      margin: 0;
+      min-height: 100vh;
+      color: #2c3e50;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .header {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: #fff;
+      padding: 24px 0 16px 0;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 18px rgba(102, 126, 234, 0.07);
+    }
+    .dashboard-layout {
+      display: flex;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .sidebar {
+      width: 220px;
+      background: linear-gradient(135deg, #667eea 80%, #764ba2 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 0 0 0;
+      box-shadow: 2px 0 18px rgba(102, 126, 234, 0.07);
+      min-height: 100vh;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 32px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      border-left: 4px solid transparent;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      margin-bottom: 2px;
+    }
+    .sidebar a.active, .sidebar a:hover {
+      background: rgba(255,255,255,0.10);
+      border-left: 4px solid #ffd700;
+      color: #ffd700;
+    }
+    .sidebar .sidebar-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin: 0 0 30px 32px;
+      letter-spacing: 1px;
+    }
+    .main-content {
+      flex: 1 1 auto;
+      padding: 50px 40px;
+      background: #fff;
+      border-radius: 0 18px 18px 0;
+      box-shadow: 0 4px 24px rgba(30,60,114,0.10);
+      margin: 40px 0 40px 0;
+      min-width: 0;
+    }
+    @media (max-width: 900px) {
+      .dashboard-layout {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex-direction: row;
+        width: 100vw;
+        min-height: unset;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        overflow-x: auto;
+      }
+      .sidebar a {
+        flex: 1 1 120px;
+        padding: 16px 0;
+        text-align: center;
+        font-size: 1rem;
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        margin-bottom: 0;
+      }
+      .sidebar a.active, .sidebar a:hover {
+        background: rgba(255,255,255,0.10);
+        border-bottom: 4px solid #ffd700;
+        border-left: none;
+      }
+      .sidebar .sidebar-title {
+        display: none;
+      }
+      .main-content {
+        border-radius: 0 0 18px 18px;
+        margin: 0;
+        padding: 30px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Admin Dashboard</div>
+  <div class="dashboard-layout">
+    <nav class="sidebar">
+      <div class="sidebar-title">Menu</div>
+      <a href="#" class="active">Dashboard</a>
+      <a href="#">Manage Users</a>
+      <a href="#">Reports</a>
+      <a href="#">Settings</a>
+      <a href="../index.html">Logout</a>
+    </nav>
+    <main class="main-content">
+      <h2>Welcome, Admin!</h2>
+      <p>Manage users, view reports, and oversee NSS activities from your dashboard.</p>
+      <div class="dashboard-links">
+        <a href="#" class="dashboard-link">Manage Users</a>
+        <a href="#" class="dashboard-link">Reports</a>
+        <a href="#" class="dashboard-link">Settings</a>
+        <a href="../index.html" class="dashboard-link">Back to Home</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

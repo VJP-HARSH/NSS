@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About NSS - National Service Scheme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+        }
+
+        /* Enhanced Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1e3c72;
+            text-decoration: none;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #1e3c72, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 15px 28px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .auth-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .login-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Header Section */
+        .header-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #ffffff, #ffd700, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .header-content .tagline {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .header-content .motto {
+            font-size: 1.3rem;
+            font-style: italic;
+            opacity: 0.9;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            padding-top: 20px;
+            margin-top: 20px;
+            display: inline-block;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Enhanced Navigation Tabs */
+        .nav-tabs {
+            background: white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+        }
+
+        .nav-container-tabs {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-tab {
+            padding: 25px 35px;
+            cursor: pointer;
+            border-bottom: 4px solid transparent;
+            font-weight: 600;
+            color: #5a6c7d;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            color: #2a5298;
+            border-bottom-color: #2a5298;
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Content Sections */
+        .content-section {
+            padding: 80px 0;
+            display: none;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #5a6c7d;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #5a6c7d;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Enhanced Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(180deg, #2a5298, #667eea);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            padding: 30px;
+            width: 45%;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #2a5298, #667eea);
+            border-radius: 50%;
+            top: 30px;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #2a5298;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -26px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -26px;
+        }
+
+        .timeline-year {
+            background: linear-gradient(135deg, #2a5298, #667eea);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(42, 82, 152, 0.3);
+        }
+
+        .timeline-content {
+            color: #5a6c7d;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Enhanced Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid #2a5298;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #1e3c72;
+            display: block;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #5a6c7d;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Activities Grid */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 6px solid #2a5298;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .activity-card:hover::before {
+            left: 100%;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .activity-card h4 {
+            color: #1e3c72;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .activity-card p {
+            color: #5a6c7d;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Enhanced Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 6px solid #2a5298;
+            padding: 40px;
+            margin: 50px 0;
+            border-radius: 0 20px 20px 0;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .quote-box:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 5rem;
+            color: #2a5298;
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            line-height: 1;
+            opacity: 0.3;
+        }
+
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #2c3e50;
+            margin-left: 50px;
+            line-height: 1.7;
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 25px;
+            font-weight: 700;
+            color: #1e3c72;
+            font-size: 1.1rem;
+        }
+
+        /* Enhanced Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .highlight-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .highlight-box p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+            margin-top: 80px;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-tab {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 40px);
+                left: 40px !important;
+            }
+            
+            .timeline-item::before {
+                left: -27px !important;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .auth-section {
+                position: fixed;
+                top: 200px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: 0.3s;
+                pointer-events: none;
+            }
+
+            .nav-menu.active ~ .auth-section {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header" id="navbar-custom">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">NSS Portal</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="About_Us.html" class="nav-link active">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Activity.html" class="nav-link">Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallary.html" class="nav-link">gallery</a>
+                </li>
+            </ul>
+
+            <div class="auth-section">
+                <a href="auth/login.html" class="login-btn" id="loginBtn">Login</a>
+                <a href="auth/register.html" class="register-btn" id="registerBtn">Register</a>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container">
+            <div class="header-content">
+                <h1>National Service Scheme</h1>
+                <div class="tagline">Building Character Through Service</div>
+                <div class="motto">"Not Me But You"</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-tabs">
+        <div class="nav-container-tabs">
+            <div class="nav-tab active" onclick="showSection('overview')">Overview</div>
+            <div class="nav-tab" onclick="showSection('history')">History</div>
+            <div class="nav-tab" onclick="showSection('activities')">Activities</div>
+            <div class="nav-tab" onclick="showSection('impact')">Impact</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Overview Section -->
+        <div class="content-section active" id="overview">
+            <div class="section-header">
+                <h2 class="section-title">About NSS</h2>
+                <p class="section-subtitle">Fostering social responsibility and national integration through meaningful community service</p>
+            </div>
+
+            <div class="card">
+                <h3>Our Foundation</h3>
+                <p>The National Service Scheme (NSS) embodies the visionary ideals of Mahatma Gandhi, who emphasized that students should view their education not as an opportunity for intellectual luxury, but as preparation for dedicated service to society. The scheme represents a commitment to developing socially conscious citizens who understand their responsibility toward national development.</p>
+                <p>Established as a means to bridge the gap between academic learning and practical social service, NSS has evolved into a powerful instrument for character building, national integration, and community development.</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">
+                    Students should do something positive so that the life of the villagers might be raised to a higher material and moral level.
+                </div>
+                <div class="quote-author">— Mahatma Gandhi</div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Our Mission</h3>
+                <p>To develop social consciousness among students and provide them with opportunities to work with the community in solving problems concerning the country and developing wholesome contacts between students and teachers on one hand and establishing a constructive linkage between the campus and the community on the other.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">All</span>
+                    <div class="stat-label">States & UTs Covered</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">55+</span>
+                    <div class="stat-label">Years of Service</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1969</span>
+                    <div class="stat-label">Year Established</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Millions</span>
+                    <div class="stat-label">Lives Impacted</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="content-section" id="history">
+            <div class="section-header">
+                <h2 class="section-title">Historical Evolution</h2>
+                <p class="section-subtitle">From Gandhi's vision to nationwide implementation</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1950</div>
+                    <div class="timeline-content">
+                        <strong>CABE Recommendation:</strong> The Central Advisory Board of Education recommended that students should devote time to manual work on a voluntary basis, with active teacher participation.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1952</div>
+                    <div class="timeline-content">
+                        <strong>First Five Year Plan:</strong> Emphasized the need for social and labour service, leading to the implementation of service camps and village apprenticeship schemes across educational institutions.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1958</div>
+                    <div class="timeline-content">
+                        <strong>Nehru's Vision:</strong> Prime Minister Jawaharlal Nehru proposed making social service a prerequisite for graduation and directed the Ministry of Education to develop a comprehensive scheme.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1959</div>
+                    <div class="timeline-content">
+                        <strong>National Service Committee:</strong> Dr. C.D. Deshmukh chaired a committee to develop concrete recommendations for implementing national service in educational institutions.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1964-66</div>
+                    <div class="timeline-content">
+                        <strong>Kothari Commission:</strong> The Education Commission recommended integrating social service at all educational levels, providing the framework for systematic implementation.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1969</div>
+                    <div class="timeline-content">
+                        <strong>Official Launch:</strong> On September 24, 1969, Dr. V.K.R.V. Rao launched NSS in 37 universities during Gandhi Centenary Year with ₹5 crores allocation under the Fourth Five Year Plan.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities Section -->
+        <div class="content-section" id="activities">
+            <div class="section-header">
+                <h2 class="section-title">Our Activities</h2>
+                <p class="section-subtitle">Comprehensive community service programs addressing diverse social needs</p>
+            </div>
+
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <h4>Rural & Urban Development</h4>
+                    <p>Systematic adoption of villages and urban slums for comprehensive development work, including infrastructure improvement, sanitation, and community organization.</p>
+                </div>
+
+                <div class="activity-card">
+                    <h4>Healthcare Services</h4>
+                    <p>Conducting medico-social surveys, establishing medical centers, organizing mass immunization drives, and providing assistance to patients in hospitals and healthcare facilities.</p>
+                </div>
+
+                <div class="activity-card">
+                    <h4>Educational Initiatives</h4>
+                    <p>Adult literacy programs for marginalized communities, awareness campaigns on social issues, and educational support for underprivileged children.</p>
+                </div>
+
+                <div class="activity-card">
+                    <h4>Disaster Management</h4>
+                    <p>Emergency response and relief operations during natural calamities including cyclones, floods, earthquakes, tsunamis, and other disaster situations nationwide.</p>
+                </div>
+
+                <div class="activity-card">
+                    <h4>Environmental Conservation</h4>
+                    <p>Eco-development programs, watershed management initiatives, tree plantation drives, waste management, and sustainable development projects.</p>
+                </div>
+
+                <div class="activity-card">
+                    <h4>Social Awareness</h4>
+                    <p>Campaigns against social evils, AIDS awareness through "Universities Talk AIDS" (UTA), blood donation drives, and promotion of national values and integration.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Special Thematic Campaigns</h3>
+                <p><strong>Youth Against Famine (1973):</strong> Addressing food security and hunger issues</p>
+                <p><strong>Youth Against Dirt & Disease (1974-75):</strong> Public health and sanitation initiatives</p>
+                <p><strong>Youth for Literacy (1985-93):</strong> Educational empowerment and adult education</p>
+                <p><strong>Youth for National Integration (1993-95):</strong> Promoting communal harmony and unity</p>
+                <p><strong>Youth for Sustainable Development (1995-96 onwards):</strong> Focus on watershed management and environmental conservation</p>
+            </div>
+        </div>
+
+        <!-- Impact Section -->
+        <div class="content-section" id="impact">
+            <div class="section-header">
+                <h2 class="section-title">Our Impact</h2>
+                <p class="section-subtitle">Transforming communities and building responsible citizens</p>
+            </div>
+
+            <div class="card">
+                <h3>Nationwide Presence</h3>
+                <p>NSS has expanded to cover all states and Union Territories, reaching universities, colleges, and +2 level institutions across India. The program has successfully created a network of socially conscious students and educators committed to national development.</p>
+                <p>The scheme has earned appreciation, respect, and confidence from communities nationwide, with numerous instances of exemplary work by NSS units demonstrating the program's effectiveness in creating meaningful social change.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Core Values We Promote</h3>
+                <p>Nationalism • Democracy • Secularism • Social Harmony • Scientific Temper • Community Service • National Integration • Environmental Consciousness</p>
+            </div>
+
+            <div class="card">
+                <h3>International Recognition</h3>
+                <p>The "Universities Talk AIDS" (UTA) campaign launched in 1991-92 has earned international attention and appreciation for its innovative approach to AIDS awareness and prevention education among youth.</p>
+            </div>
+
+            <div class="card">
+                <h3>Transformative Outcomes</h3>
+                <p>NSS has successfully:</p>
+                <p>• Developed social consciousness and awareness among millions of students</p>
+                <p>• Created better understanding and appreciation of community problems</p>
+                <p>• Established effective linkages between educational institutions and communities</p>
+                <p>• Contributed to national integration and communal harmony</p>
+                <p>• Promoted democratic values and scientific temper</p>
+                <p>• Provided practical experience in community service and social work</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 National Service Scheme. Committed to building a better India through service and social responsibility.</p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Animate hamburger menu
+            const spans = mobileMenu.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = mobileMenu.querySelectorAll('span');
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            });
+        });
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Smooth scroll to top of content
+            document.querySelector('.nav-tabs').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add smooth scrolling and intersection observer for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card, .activity-card, .stat-card, .timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
