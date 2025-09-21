@@ -113,6 +113,47 @@
             align-items: center;
         }
 
+        /* Mobile header improvements */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-item {
+                width: 100%;
+                text-align: center;
+                margin: 0;
+            }
+            .nav-link {
+                width: 90%;
+                margin: 8px auto;
+                border-radius: 18px;
+                font-size: 18px;
+            }
+            .auth-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .login-btn, .register-btn {
+                width: 90%;
+                font-size: 17px;
+                margin: 0 auto;
+                display: block;
+            }
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+
         .login-btn {
             padding: 10px 20px;
             text-decoration: none;
@@ -724,40 +765,77 @@
                 left: -100%;
                 top: 70px;
                 flex-direction: column;
-                background: rgba(255, 255, 255, 0.95);
+                background: rgba(255, 255, 255, 0.97);
                 backdrop-filter: blur(10px);
                 width: 100%;
                 text-align: center;
                 transition: 0.3s;
                 box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 20px 0;
+                padding: 20px 0 0 0;
+                z-index: 1001;
             }
-
             .nav-menu.active {
                 left: 0;
             }
-
             .nav-item {
-                margin: 10px 0;
+                margin: 0;
+                width: 100%;
             }
-
+            .nav-link {
+                display: block;
+                width: 100%;
+                margin: 0 auto;
+                padding: 18px 0;
+                font-size: 1.2rem;
+                border-radius: 0;
+                background: none !important;
+                color: #1e3c72 !important;
+                font-weight: 700;
+                box-shadow: none !important;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .nav-link.active {
+                color: #764ba2 !important;
+                background: none !important;
+                border-bottom: 2px solid #764ba2;
+            }
+            .auth-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0 0 20px 0;
+                background: rgba(255,255,255,0.97);
+                position: fixed;
+                left: -100%;
+                top: calc(70px + 320px);
+                z-index: 1002;
+                transition: left 0.3s;
+            }
+            .nav-menu.active ~ .auth-section {
+                left: 0;
+            }
+            .login-btn, .register-btn {
+                width: 100%;
+                font-size: 1.1rem;
+                margin: 0;
+                border-radius: 0;
+                background: none !important;
+                color: #1e3c72 !important;
+                border: none;
+                box-shadow: none;
+                text-align: center;
+                padding: 18px 0;
+                font-weight: 700;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .register-btn {
+                border-bottom: none;
+            }
             .mobile-menu {
                 display: flex;
-            }
-
-            .auth-section {
-                position: fixed;
-                top: 200px;
-                left: 50%;
-                transform: translateX(-50%);
-                opacity: 0;
-                transition: 0.3s;
-                pointer-events: none;
-            }
-
-            .nav-menu.active ~ .auth-section {
-                opacity: 1;
-                pointer-events: all;
             }
         }
     </style>
@@ -785,7 +863,6 @@
                     <a href="gallary.html" class="nav-link">gallery</a>
                 </li>
             </ul>
-
             <div class="auth-section">
                 <a href="auth/login.html" class="login-btn" id="loginBtn">Login</a>
                 <a href="auth/register.html" class="register-btn" id="registerBtn">Register</a>
